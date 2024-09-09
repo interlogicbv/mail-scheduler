@@ -59,24 +59,24 @@ async function sendEmail() {
     const data = await getData(sessionKey);
 
     //get right data
-    var o = data.find((o) => o?.vehicle?.code === process.env.LICENSE);
+    var o = data.find((o) => o.vehicle.code === process.env.LICENSE);
 
     console.log(o);
 
     // Pad naar de ejs template
     const templatePath = path.join(__dirname, "templates", "emailTemplate.ejs");
     const templateData = {
-      license: o?.vehicle?.code,
-      status: o?.activityStatus?.name,
-      eta: `${new Date(o.etaStatus?.eta || "").toLocaleString()}`,
-      destination: `${o?.etaStatus?.address?.street || "Unknown"}, ${
-        o?.etaStatus?.address?.zipCode || "Unknown"
-      } ${o?.etaStatus?.address?.city || "Unknown"} ${
-        o?.etaStatus?.address?.country || "Unknown"
+      license: o.vehicle.code,
+      status: o.activityStatus.name,
+      eta: `${new Date(o.etaStatus.eta || "").toLocaleString()}`,
+      destination: `${o.etaStatus.address.street || "Unknown"}, ${
+        o.etaStatus.address.zipCode || "Unknown"
+      } ${o.etaStatus.address.city || "Unknown"} ${
+        o.etaStatus.address.country || "Unknown"
       }`,
-      latitude: o?.position?.latitude,
-      longitude: o?.position?.longitude,
-      update: new Date(o?.positionLastUpdate).toLocaleString(),
+      latitude: o.position.latitude,
+      longitude: o.position.longitude,
+      update: new Date(o.positionLastUpdate).toLocaleString(),
     };
 
     ejs.renderFile(templatePath, templateData, (err, html) => {
