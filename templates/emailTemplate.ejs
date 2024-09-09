@@ -2,14 +2,24 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Email</title>
+    <title>Update from our truck<%= license %></title>
+    <style type="text/css"></style>
   </head>
-  <body>
-    <h1><%= name %>!</h1>
-    <p>Dit is een automatisch bericht met jouw gegevens:</p>
+  <body style="padding: 32px">
+    <h1 style="font-size: 16px; font-weight: normal">
+      Update from our truck: <b><%= license %></b>
+    </h1>
     <ul>
-      <li>Naam: <%= name %></li>
-      <li>Bericht: <%= message %></li>
+      <li>Status: <b><%= status %></b></li>
+      <li>ETA: <b><%= eta %></b></li>
+      <li>Destination: <b><%= destination %></b></li>
     </ul>
+    <a href="https://maps.google.com/?q=<%= latitude %>,<%= longitude %>">
+      Current location
+    </a>
+    <p style="color: rgb(94, 94, 94); font-size: 12px; font-style: italic">
+      Approximate geographic location based on boardcomputer log from: <%=
+      update %>
+    </p>
   </body>
 </html>
