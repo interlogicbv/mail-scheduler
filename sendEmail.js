@@ -85,7 +85,7 @@ async function sendEmail() {
       // Email opties
       let mailOptions = {
         from: process.env.SMTP_USER,
-        to: process.env.TO.split(" "),
+        to: process.env.TO,
         subject: "Update from our truck: " + process.env.LICENSE,
         html: html,
       };
