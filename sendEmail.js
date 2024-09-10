@@ -1,7 +1,6 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 const ejs = require("ejs");
-const fs = require("fs");
 const path = require("path");
 const axios = require("axios");
 
@@ -54,14 +53,12 @@ async function sendEmail() {
       },
     });
 
-    // 1. Haal de sessionKey op
+    // haal de sessionKey op
     const sessionKey = await getSessionKey();
     const data = await getData(sessionKey);
 
     //get right data
     var o = data.find((o) => o.vehicle.code === process.env.LICENSE);
-
-    console.log(o);
 
     // Pad naar de ejs template
     const templatePath = path.join(__dirname, "templates", "emailTemplate.ejs");
@@ -88,7 +85,7 @@ async function sendEmail() {
       // Email opties
       let mailOptions = {
         from: process.env.SMTP_USER,
-        to: process.env.TO,
+        to: process.env.TO.split(" "),
         subject: "Update from our truck: " + process.env.LICENSE,
         html: html,
       };
