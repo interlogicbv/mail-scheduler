@@ -59,12 +59,10 @@ async function sendEmail() {
 
     //get right data
     var o = data.find((o) => o.vehicle.code === process.env.LICENSE);
-    console.log(o);
 
     // Pad naar de ejs template
     const templatePath = path.join(__dirname, "templates", "emailTemplate.ejs");
 
-    var templateDate = {};
     if (o.etaStatus) {
       templateData = {
         license: o.vehicle.code,
@@ -100,7 +98,7 @@ async function sendEmail() {
       // Email opties
       let mailOptions = {
         from: process.env.SMTP_USER,
-        to: process.env.TO,
+        to: process.env.TO.split(";"),
         subject: "Update from our truck: " + process.env.LICENSE,
         html: html,
       };
